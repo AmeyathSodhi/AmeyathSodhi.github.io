@@ -35,6 +35,9 @@ source(here::here("pages", "project", "src", "functions", "save_plot_as_png.R"))
 #| warning: false
 #| include: false
 
+# call script to read clean/wrangle and write data for later use 
+source(here::here("pages", "project", "src", "data", "data_cleaning.R"))
+
 # read data
 mtcars <- readRDS(here::here("pages", "project", "data", "mtcars.Rds"))
 ```

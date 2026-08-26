@@ -32,6 +32,9 @@ source(here::here("pages", "project", "src", "functions", "save_plot_as_png.R"))
 #| warning: false
 #| include: false
 
+# call script to read clean/wrangle and write data for later use 
+source(here::here("pages", "project", "src", "data", "data_cleaning.R"))
+
 # read data
 mtcars <- readRDS(here::here("pages", "project", "data", "mtcars.Rds"))
 ```
@@ -47,14 +50,13 @@ mtcars <- readRDS(here::here("pages", "project", "data", "mtcars.Rds"))
 # from a webpage manually is more difficult 
 # then embed the png into the webpage 
 
-
 p <- 
   mtcars |>
   ggplot(mapping = aes(x = hp, y = mpg)) +
   geom_point()
 ```
 
-```{r, saveplot}
+```{r, saveplot-mpg}
 #| message: false
 #| warning: false
 #| include: false
@@ -70,6 +72,43 @@ save_plot_as_png(
 
 ![Caption Text](/pages/project/figs/mpg-by-hp.png){width=80% fig-alt="This is alt-text for describing the plot for screen readers ..."}
 
+
+## Plot Explanation
+
+Blah, blah, blah ...
+
+
+```{r, plot-mpg-by-wt-for-cyl}
+#| echo: false
+#| message: false
+#| warning: false
+
+# create plot for subset
+p <- 
+  mtcars |>
+  # get only 6 cylinder cars
+  filter(cyl %in% 4:6) |>
+  ggplot(mapping = aes(x = wt, y = mpg)) +
+  geom_point()
+```
+
+<!-- SAVE PLOT AS PNG -->
+
+```{r, saveplot-cyl-subset}
+#| message: false
+#| warning: false
+#| include: false
+
+# save the plot as a .png file using the save_plot_as_png()
+save_plot_as_png(
+  plot = p,
+  file_name = "mpg-by-wt-for-cyl.png"
+)
+```
+
+## Plot Header
+
+![Caption Text](/pages/project/figs/mpg-by-wt-for-cyl.png){width=80% fig-alt="This is alt-text for describing the plot for screen readers ..."}
 
 ## Plot Explanation
 
